@@ -1,12 +1,8 @@
 /*
-
 This file contains all of the code running in the background that makes resumeBuilder.js possible. We call these helper functions because they support your code in this course.
-
-Don't worry, you'll learn what's going on in this file throughout the course. You won't need to make any changes to it until you start experimenting with inserting a Google Map in Problem Set 3.
 
 Cameron Pittman
 */
-
 
 /*
 These are HTML strings. As part of the course, you'll be using JavaScript functions
@@ -249,11 +245,51 @@ Uncomment all the code below when you're ready to implement a Google Map!
 */
 
 // Calls the initializeMap() function when the page loads
-window.addEventListener('load', initializeMap);
+//window.addEventListener('load', initializeMap);
 
 // Vanilla JS way to listen for resizing of the window
 // and adjust map bounds
 window.addEventListener('resize', function (e) {
     // Make sure the map bounds get updated on page resize
     map.fitBounds(mapBounds);
+});
+
+
+/*
+  These scripts are written in JavaScript. You'll be breaking them down as part of
+a quiz. Essentially, the next few lines are checking to see if you have not
+changed each section of the resume. If you have not made any changes to a section
+of the resume, then that part of the resume does not show up. More on this in the
+course.
+*/
+function intializeSections() {
+    if (document.getElementsByClassName("flex-item").length === 0) {
+        document.getElementById("topContacts").style.backgroundColor = "black";
+    }
+    if (document.getElementsByTagName("h1").length === 0) {
+        document.getElementById("header").style.backgroundColor = "black";
+    }
+    if (document.getElementsByClassName("work-entry").length === 0) {
+        document.getElementById("workExperience").style.backgroundColor = "black";
+    }
+    if (document.getElementsByClassName("project-entry").length === 0) {
+        document.getElementById("projects").style.backgroundColor = "black";
+    }
+    if (document.getElementsByClassName("education-entry").length === 0) {
+        document.getElementById("education").style.backgroundColor = "black";
+    }
+    if (document.getElementsByClassName("skills-entry").length === 0) {
+        document.getElementById("skillsChart").style.backgroundColor = "black";
+    }
+    if (document.getElementsByClassName("flex-item").length === 0) {
+        document.getElementById("letsConnect").style.backgroundColor = "black";
+    }
+    if (document.getElementById("map") == undefined) {
+        document.getElementById("mapDiv").style.backgroundColor = "black";
+    }
+}
+
+$(document).ready(function () {
+    intializeSections();
+    initializeMap();
 });
