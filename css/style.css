@@ -4,23 +4,23 @@
   font-family: 'Roboto', sans-serif;
 }
 
-
-
-.education-entry, .work-entry, .project-entry {
+.education-entry,
+.work-entry,
+.project-entry {
   padding-left: 5%;
   padding-right: 5%;
 }
 
-
 h1 {
   font-size: 40px;
-  color: #F5A623;
+  /*color: #F5A623;*/  /* ORIGINAL */
+  color: navy;        /* MY ADDITION @@@@@@@@@@@@@@@@@@@@@@@@@@*/
   line-height: 48px;
   display: inline;
 }
 
 h2 {
-  font-style: bold;
+  font-weight: bold;
   font-size: 24px;
   color: #999999;
   line-height: 29px;
@@ -35,7 +35,7 @@ h3 {
 }
 
 h4 {
-  font-style: bold;
+  font-weight: bold;
   font-size: 14px;
   color: #4A4A4A;
   line-height: 17px;
@@ -46,7 +46,6 @@ h2, h3, h4, h5 {
   padding-left: 5%;
   padding-right: 5%;
 }
-
 
 .date-text {
   font-style: italic;
@@ -85,7 +84,8 @@ a {
 }
 
 #skillsH3 {
-  color: #F5AE23;
+  /*color: #F5AE23  /* ORIGINAL */
+  color: navy;      /* MY ADDITION @@@@@@@@@@@@@@@@@@@@@@@@@@*/
   display: none;
 }
 
@@ -118,23 +118,18 @@ a {
 
 /* TODO: Replace with image later */
 #header {
-  background-color: #484848;
+  /*background-color: #484848;*/  /* ORIGINAL */
+  background-color: #14b0b0; /* MY CHANGE rgb(20,176,176) */
 }
 
 .flex-box {
-  display: -webkit-flex;
+  /*display: -webkit-flex;*/  /* in ORIGINAL*/
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-around;
   padding: 10px;
 }
-
-/*----  MY ADDITION ----*/
-/*li.flex-item {
- height: auto;
-}*/
-/*----------------------*/
 
 .center-content {
   padding: 5%;
@@ -143,7 +138,6 @@ a {
 ul {
   list-style-type: circle;
 }
-
 
 .biopic {
   float: left;
@@ -202,18 +196,34 @@ span {
     display: none;
   }
 }
+/* skillsChart */
+
 
 #map {
   display: block;
   height: 100%;
   margin-left: 5%;
   margin-right: 5%;
+
 }
 
 #mapDiv {
   height: 400px;
   width: 100%;
   padding-bottom: 5%;
+  background-color: #F3F3F3; /* MY ADDITION @@@@@@@@@@@@@@@@@@@@@@@@*/
+  overflow: hidden;           /* MY ADDITION @@@@@@@@@@@@@@@@@@@@@@@@ */
+}
+
+/* MY ADDITION @@@@@@@@@@@@@@@@@@@@@@@@*/
+@media only screen and (max-width: 400px) {
+  #skillsChart {
+    display: none;
+  }
+
+  #mapDiv {
+    background-color: #FFF; /* MY ADDITION @@@@@@@@@@@@@@@@@@@@@@@@*/
+  }
 }
 
 @media only screen and (min-width: 750px) {
@@ -231,6 +241,10 @@ span {
   list-style: none;
 }
 
+#footerContacts {
+  background-color: #14b0b0;
+}
+
 /*  infoWindow stlyes */
 /** {
   outline: 1px solid red !important;
@@ -241,7 +255,6 @@ span {
   height: 310px;
   margin: 10px;
   text-align: center;
-  /*overflow: hidden;*/
 }
 
 /* chart classes */
@@ -253,10 +266,8 @@ span {
 }
 
 .row {
-  /*display: inline-block;*/
   height: 30px;
   margin: 5px 5px;
-  display: -webkit-flex;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -273,5 +284,11 @@ span {
   margin-right: 10px;
 }
 
+.navy-text {
+  color: navy;
+}
 
-/*---------------------------*/
+.navy-bg-white-txt {
+  background-color: navy;
+  color: #fff;
+}

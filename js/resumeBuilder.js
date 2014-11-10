@@ -7,20 +7,23 @@ var work = {
             "title": "King of the Franks",
             "location": "Aachen, Germany",
             "dates": "795 - 822",
-            "description": "Ruling the Frankish Empire"
+            "description": "Ruling the Frankish Empire",
+            "url": "http://en.wikipedia.org/wiki/Francia"
         },
         {
             "employer": "El Camino College",
             "title": "Professor of Mathematics",
             "location": "Torrance, CA, USA",
             "dates": "August, 1977 - December, 2012",
-            "description": "Teaching mathematics and computer science"
+            "description": "Teaching mathematics and computer science",
+            "url": "http://www.elcamino.edu"
         }
     ],
     "display": function () {
         for (job in work.jobs) {
             $('#workExperience').append(HTMLworkStart);
             var employer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
+            employer = employer.replace("#", work.jobs[job].url);
             var title = HTMLworkTitle.replace("%data%", work.jobs[job].title);
             $('.work-entry:last').append(employer + title);
             var dates = HTMLworkDates.replace("%data%", work.jobs[job].dates);
@@ -78,11 +81,10 @@ var bio = {
         "mobile": "310-528-9999",
         "email": "jhyman@cox.net",
         "github": "jehyman",
-        "twitter": "@Joe",
         "location": "Rancho Palos Verdes, CA, USA"
     },
     "skills": [
-        { "name": "Teaching",       "level": 8 },
+        { "name": "Teaching",       "level": 8 }, // level is on a scale of 1 to 10
         { "name": "Mathematics",    "level": 9 },
         { "name": "C++",            "level": 8 },
         { "name": "C#",             "level": 8 },
@@ -129,16 +131,15 @@ var bio = {
             .data(bio.skills);
         var topDivEnter = topDiv.enter().append("div").classed("row", true);
 
-        topDivEnter.append("div").classed("skill", true).text(function (d) { return d.name; });
+        topDivEnter.append("div").classed("skill", true)
+            .text(function (d) { return d.name; });
 
         topDivEnter.append("div").classed("bar", true)
             .style('width', function (d) { return d.level * 20 + "px"; })
             .style('text-align','center')
             .text(function (d) { return d.level; });
-
     }
 };
-//var HTMLskillsChartStart = "<div class='skills-entry'></div>";
 
 var education = {
     "schools": [
@@ -213,16 +214,18 @@ function inName(inName) {
     return names[0][0].toUpperCase() + names[0].slice(1).toLowerCase() + " " + names[1].toUpperCase();
 }
 //============================================================================================
-// Fill-in the resume data
+// Setup button and map
 $('#main').append(internationalizeButton);
 $('#mapDiv').append(googleMap);
 //--------------------------------------
+// Fill-in the resume data
 bio.display();
 work.display();
 projects.display();
 education.display();
 //=============================================================================================
-// Below is the html for the infoWindows, this is indexed on the "place name".
+// Below is the html for the infoWindows, this is indexed on the "place name".  Supplies the "content"
+// for the infoWindow - see "createMapMarker"
 var locationHTML = {
     "Westwood, Los Angeles, CA, USA":
         "<div class=\"info-content\">" +
@@ -238,7 +241,7 @@ var locationHTML = {
           "<div >" +
            "<img src='images/RPV.jpg'>" +
           "</div>" +
-          "<a href=\"http://www.UCLA.edu\">More information</a>" +
+          "<a href=\"http://en.wikipedia.org/wiki/Rancho_Palos_Verdes,_California\">More information</a>" +
         "</div>",
     "Torrance, CA, USA":
         "<div class=\"info-content\">" +
@@ -262,6 +265,6 @@ var locationHTML = {
           "<div >" +
            "<img src='images/frankish_empire.jpg'>" +
           "</div>" +
-          "<a href=\"http://www.Oberlin.edu\">More FIXXX information</a>" +
+          "<a href=\"http://en.wikipedia.org/wiki/Francia\">More information</a>" +
         "</div>"
 };
