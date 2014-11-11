@@ -1,6 +1,5 @@
 /*
 This file contains all of the code running in the background that makes resumeBuilder.js possible. We call these helper functions because they support your code in this course.
-
 Cameron Pittman
 */
 
@@ -11,7 +10,6 @@ replace the %data% placeholder text you see in them.
 var HTMLheaderName = "<h1 id='name'>%data%</h1>";
 var HTMLheaderRole = "<span>%data%</span><hr/>";
 
-// change 'orange-text' to 'navy-text' @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 var HTMLcontactGeneric = "<li class='flex-item'><span class='navy-text'>%contact%</span><span class='white-text'>%data%</span></li>";
 var HTMLmobile = "<li class='flex-item'><span class='navy-text'>mobile</span><span class='white-text'>%data%</span></li>";
 var HTMLemail = "<li class='flex-item'><span class='navy-text'>email</span><span class='white-text'>%data%</span></li>";
@@ -19,7 +17,6 @@ var HTMLtwitter = "<li class='flex-item'><span class='navy-text'>twitter</span><
 var HTMLgithub = "<li class='flex-item'><span class='navy-text'>github</span><span class='white-text'>%data%</span></li>";
 var HTMLblog = "<li class='flex-item'><span class='navy-text'>blog</span><span class='white-text'>%data%</span></li>";
 var HTMLlocation = "<li class='flex-item'><span class='navy-text'>location</span><span class='white-text'>%data%</span></li>";
-//--------------------------  END CHANGES ------------------------------------------------
 var HTMLbioPic = "<img src='%data%' class='biopic'>";
 var HTMLWelcomeMsg = "<span class='welcome-message'>%data%</span>";
 
@@ -46,8 +43,7 @@ var HTMLschoolDates = "<div class='date-text'>%data%</div>";
 var HTMLschoolLocation = "<div class='location-text'>%data%</div>";
 var HTMLschoolMajor = "<em><br>Major: %data%</em>"
 
-// id='onLine' added by Joe
-var HTMLonlineClasses = "<h3 id='onLine'>Online Classes</h3>";
+var HTMLonlineClasses = "<h3>Online Classes</h3>";
 var HTMLonlineTitle = "<a href='#'>%data%";
 var HTMLonlineSchool = " - %data%</a>";
 var HTMLonlineDates = "<div class='date-text'>%data%</div>";
@@ -56,46 +52,49 @@ var HTMLonlineURL = "<br><a href='#'>%data%</a>";
 var internationalizeButton = "<button>Internationalize</button>";
 var googleMap = "<div id='map'></div>";
 //-------------------------------------------------
-//skills chart
+//My Addition for skills chart
 var HTMLskillsChartStart = "<div class='skills-entry'></div>";
-
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 /*
-The International Name challenge in Lesson 2 where you'll create a function that will need this helper code to run. Don't delete! It hooks up your code to the button you'll be appending.
+  These scripts are written in JavaScript. You'll be breaking them down as part of
+a quiz. Essentially, the next few lines are checking to see if you have not
+changed each section of the resume. If you have not made any changes to a section
+of the resume, then that part of the resume does not show up. More on this in the
+course.
 */
-$(document).ready(function () {
-    $('button').click(function () {
-        var iName = inName(bio.name) || function () { };
-        $('#name').html(iName);
-    });
-})
-
-/*
-The next few lines about clicks are for the Collecting Click Locations quiz in Lesson 2.
-*/
-clickLocations = [];
-
-function logClicks(x, y) {
-    clickLocations.push(
-      {
-          "x": x,
-          "y": y
-      }
-    );
-    console.log("x location: " + x + "; y location: " + y);
+function intializeSections() {
+    if (document.getElementsByClassName("flex-item").length === 0) {
+        document.getElementById("topContacts").style.backgroundColor = "black";
+    }
+    if (document.getElementsByTagName("h1").length === 0) {
+        document.getElementById("header").style.backgroundColor = "black";
+    }
+    if (document.getElementsByClassName("work-entry").length === 0) {
+        document.getElementById("workExperience").style.backgroundColor = "black";
+    }
+    if (document.getElementsByClassName("project-entry").length === 0) {
+        document.getElementById("projects").style.backgroundColor = "black";
+    }
+    if (document.getElementsByClassName("education-entry").length === 0) {
+        document.getElementById("education").style.backgroundColor = "black";
+    }
+    if (document.getElementsByClassName("skills-entry").length === 0) {
+        document.getElementById("skillsChart").style.backgroundColor = "black";
+    }
+    if (document.getElementsByClassName("flex-item").length === 0) {
+        document.getElementById("letsConnect").style.backgroundColor = "black";
+    }
+    if (document.getElementById("map") == undefined) {
+        document.getElementById("mapDiv").style.backgroundColor = "black";
+    }
 }
-
-$(document).click(function (loc) {
-    // your code goes here!
-    logClicks(loc.pageX, loc.pageY);
-});
-
+//==============================================================================
 /*
 This is the fun part. Here's where we generate the custom Google Map for the website.
 See the documentation below for more details.
 https://developers.google.com/maps/documentation/javascript/reference
 */
 var map;    // declares a global map variable
-
 
 /*
 Start here! initializeMap() is called when page is loaded.
@@ -171,8 +170,7 @@ function initializeMap() {
             content: locationHTML[name]             // place "appropriate" html in window - see 'resumeBuilder.js'
         });
 
-        // *********************** CHECK **************************************
-        // My addition. If user closer an infoWindow, set 'map.currentInfoWidow' back to null
+        // My addition. If user closes an infoWindow, set 'map.currentInfoWidow' back to null
         // May not be needed!
         google.maps.event.addListener(infoWindow, 'closeclick', function () {
             map.currentInfoWidow = null;
@@ -180,7 +178,7 @@ function initializeMap() {
 
         // hmmmm, I wonder what this is about...
         google.maps.event.addListener(marker, 'click', function () {
-            // if infoCWindow open, close it, before opening new window
+            // if infoCWindow open, close it, before opening new window, only one window open at a time
             if (map.currentInfoWidow != null)
                 map.currentInfoWidow.close();
             infoWindow.open(map, marker)
@@ -239,57 +237,41 @@ function initializeMap() {
     // the locations array
     pinPoster(locations);
 };
+//---------------------------------------------------------
 
 /*
-Uncomment all the code below when you're ready to implement a Google Map!
+The next few lines about clicks are for the Collecting Click Locations quiz in Lesson 2.
 */
+clickLocations = [];    // global to store click locations
 
-// Calls the initializeMap() function when the page loads
-//window.addEventListener('load', initializeMap);
-
-// Vanilla JS way to listen for resizing of the window
-// and adjust map bounds
-window.addEventListener('resize', function (e) {
-    // Make sure the map bounds get updated on page resize
-    map.fitBounds(mapBounds);
-});
-
-
-/*
-  These scripts are written in JavaScript. You'll be breaking them down as part of
-a quiz. Essentially, the next few lines are checking to see if you have not
-changed each section of the resume. If you have not made any changes to a section
-of the resume, then that part of the resume does not show up. More on this in the
-course.
-*/
-function intializeSections() {
-    if (document.getElementsByClassName("flex-item").length === 0) {
-        document.getElementById("topContacts").style.backgroundColor = "black";
-    }
-    if (document.getElementsByTagName("h1").length === 0) {
-        document.getElementById("header").style.backgroundColor = "black";
-    }
-    if (document.getElementsByClassName("work-entry").length === 0) {
-        document.getElementById("workExperience").style.backgroundColor = "black";
-    }
-    if (document.getElementsByClassName("project-entry").length === 0) {
-        document.getElementById("projects").style.backgroundColor = "black";
-    }
-    if (document.getElementsByClassName("education-entry").length === 0) {
-        document.getElementById("education").style.backgroundColor = "black";
-    }
-    if (document.getElementsByClassName("skills-entry").length === 0) {
-        document.getElementById("skillsChart").style.backgroundColor = "black";
-    }
-    if (document.getElementsByClassName("flex-item").length === 0) {
-        document.getElementById("letsConnect").style.backgroundColor = "black";
-    }
-    if (document.getElementById("map") == undefined) {
-        document.getElementById("mapDiv").style.backgroundColor = "black";
-    }
+function logClicks(x, y) {
+    clickLocations.push(
+      {
+          "x": x,
+          "y": y
+      }
+    );
+    console.log("x location: " + x + "; y location: " + y);
 }
 
 $(document).ready(function () {
     intializeSections();
     initializeMap();
+
+    $(document).click(function (loc) {
+        logClicks(loc.pageX, loc.pageY);
+    });
+
+    // For the International Name challenge in Lesson 2.
+    $('button').click(function () {
+        var iName = inName(bio.name) || function () { };
+        $('#name').html(iName);
+    });
+
+    // Vanilla JS way to listen for resizing of the window
+    // and adjust map bounds
+    window.addEventListener('resize', function (e) {
+        // Make sure the map bounds get updated on page resize
+        map.fitBounds(mapBounds);
+    });
 });

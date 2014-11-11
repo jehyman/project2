@@ -43,7 +43,8 @@ var projects = {
             "images": [
                 "images/WedFront.png",
                 "images/WedPic.png"
-            ]
+            ],
+            "url": "http://joehyman.net"
         },
         {
             "title": "Trip to Greece and Turkey, 2014",
@@ -52,13 +53,15 @@ var projects = {
             "images": [
                 "images/TripFront.png",
                 "images/TripPic.png"
-            ]
+            ],
+            "url": "http://joehyman.net/Agamemnon.jpg"
         }
     ],
     "display": function () {
         for (var p in projects.project) {
             $('#projects').append(HTMLprojectStart);
             var title = HTMLprojectTitle.replace("%data%", projects.project[p].title);
+            title = title.replace("#", projects.project[p].url)
             $('.project-entry:last').append(title);
             var dates = HTMLprojectDates.replace("%data%", projects.project[p].dates);
             $('.project-entry:last').append(dates);
@@ -111,7 +114,7 @@ var bio = {
         // display contact info in footer
         $('#footerContacts').append(mobile).append(email).append(gitHub).append(loc);
         // display picture
-        $('ul:first').after(pic);  // check===========================/
+        $('ul:first').after(pic);
         // display welcome message
         $('#header').append(welcomeMsg);
         // display skills at a glance
@@ -123,17 +126,18 @@ var bio = {
                 $('#skills').append(nextSkill);
             }
         }
-        // display skills chart
+        // display skills chart using "d3js"
         $('#skillsChart').append(HTMLskillsChartStart);
-        // using "d3js"
         var topDiv = d3.select(".skills-entry")
             .selectAll("div")
             .data(bio.skills);
         var topDivEnter = topDiv.enter().append("div").classed("row", true);
 
+        // add skill to "row" div
         topDivEnter.append("div").classed("skill", true)
             .text(function (d) { return d.name; });
 
+        // add bar with level to "row" div
         topDivEnter.append("div").classed("bar", true)
             .style('width', function (d) { return d.level * 20 + "px"; })
             .style('text-align','center')
@@ -175,7 +179,7 @@ var education = {
     "display": function () {
         // display schools
         for (var school in education.schools) {
-            $('#education:last').append(HTMLschoolStart);
+            $('#education').append(HTMLschoolStart);
             var name = HTMLschoolName.replace("%data%", education.schools[school].name);
             name = name.replace("#", education.schools[school].url);
             var degree = HTMLschoolDegree.replace("%data%", education.schools[school].degree);
@@ -194,15 +198,16 @@ var education = {
         if (education.onlineCourses.length > 0) {
             $('#education').append(HTMLonlineClasses);
             for (var course in education.onlineCourses) {
+                $('#education').append(HTMLschoolStart);
                 var title = HTMLonlineTitle.replace("%data%", education.onlineCourses[course].title);
                 title = title.replace("#", "images/certificate.pdf");
                 var school = HTMLonlineSchool.replace("%data%", education.onlineCourses[course].school);
-                $('#onLine').append(title + school);                                                //  <<=== CHECK!!!
+                $('.education-entry:last').append(title + school);
                 var onlineDates = HTMLonlineDates.replace("%data%", education.onlineCourses[course].dates);
-                $('#onLine').append(onlineDates);
+                $('.education-entry:last').append(onlineDates);
                 var url = HTMLonlineURL.replace("%data%", education.onlineCourses[course].url);
                 url = url.replace("#", education.onlineCourses[course].url);
-                $('#onLine').append(url);
+                $('.education-entry:last').append(url);
             }
         }
     }
