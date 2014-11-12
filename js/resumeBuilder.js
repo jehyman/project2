@@ -140,7 +140,7 @@ var bio = {
         // add bar with level to "row" div
         topDivEnter.append("div").classed("bar", true)
             .style('width', function (d) { return d.level * 20 + "px"; })
-            .style('text-align','center')
+            .style('text-align', 'center')
             .text(function (d) { return d.level; });
     }
 };

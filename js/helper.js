@@ -32,7 +32,7 @@ var HTMLworkDescription = "<p><br>%data%</p>";
 
 var HTMLprojectStart = "<div class='project-entry'></div>";
 var HTMLprojectTitle = "<a href='#'>%data%</a>";
-var HTMLprojectDates = "<div class='date-text'>%data%</div>";
+var HTMLprojectDates = "<div class='date-text'>%data%</div999>";
 var HTMLprojectDescription = "<p><br>%data%</p>";
 var HTMLprojectImage = "<img src='%data%'>";
 
@@ -161,7 +161,6 @@ function initializeMap() {
             position: placeData.geometry.location,
             title: name
         });
-
 
         // infoWindows are the little helper windows that open when you click
         // or hover over a pin on a map. They usually contain more information

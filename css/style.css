@@ -13,7 +13,7 @@
 
 h1 {
   font-size: 40px;
-  color: navy;        /* MY ADDITION */
+  color: navy; /* MY ADDITION */
   line-height: 48px;
   display: inline;
 }
@@ -40,7 +40,10 @@ h4 {
   line-height: 17px;
 }
 
-h2, h3, h4, h5 {
+h2,
+h3,
+h4,
+h5 {
   padding: 10px;
   padding-left: 5%;
   padding-right: 5%;
@@ -83,7 +86,7 @@ a {
 }
 
 #skillsH3 {
-  color: navy;      /* MY ADDITION */
+  color: navy; /* MY ADDITION */
   display: none;
 }
 
@@ -191,7 +194,7 @@ span {
   height: 400px;
   width: 100%;
   padding-bottom: 5%;
-  background-color: #F3F3F3; /* MY ADDITION */
+  background-color: #F3F3F3;  /* MY ADDITION */
   overflow: hidden;           /* MY ADDITION */
 }
 
